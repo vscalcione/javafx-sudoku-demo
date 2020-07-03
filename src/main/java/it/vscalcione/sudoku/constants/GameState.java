@@ -1,4 +1,4 @@
-package it.vscalcione.sudoku.costants;
+package it.vscalcione.sudoku.constants;
 
 public enum GameState {
     COMPLETE,
