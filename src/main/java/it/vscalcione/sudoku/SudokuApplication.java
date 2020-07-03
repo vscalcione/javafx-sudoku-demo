@@ -1,27 +1,29 @@
 package it.vscalcione.sudoku;
 
-import it.vscalcione.sudoku.logic.build.SudokuBuildLogic;
-import it.vscalcione.sudoku.ui.IUserInterfaceContract;
-import it.vscalcione.sudoku.ui.UserInterfaceImpl;
+import it.vscalcione.sudoku.buildlogic.SudokuBuildLogic;
+import it.vscalcione.sudoku.userinterface.UserInterfaceImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class is the Root Container (the thing which attends to all of the primary objects which must communicate when
+ * the program is running (a running program is called a "process").
+ */
 public class SudokuApplication extends Application {
-
-    private IUserInterfaceContract.View uiImpl;
+    private UserInterfaceImpl uiImpl;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-
-        // Get SudokuGame object for a new game
+        //Get SudokuGame object for a new game
         uiImpl = new UserInterfaceImpl(primaryStage);
+
         try {
             SudokuBuildLogic.build(uiImpl);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            throw exception;
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 

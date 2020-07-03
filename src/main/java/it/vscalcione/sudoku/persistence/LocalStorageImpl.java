@@ -1,9 +1,14 @@
 package it.vscalcione.sudoku.persistence;
 
-import it.vscalcione.sudoku.problemdomain.IStorage;
 import it.vscalcione.sudoku.problemdomain.SudokuGame;
+import it.vscalcione.sudoku.problemdomain.IStorage;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.Collections;
+
 
 /**
  * JSON is a simple language which is commonly used for storage and data transfer in Desktop, Web, and Mobile
@@ -11,15 +16,20 @@ import java.io.*;
  * operating systems, this makes life easier for us programmers to have our programs communicate with each other, and
  * work on more devices.
  */
+public class LocalStorageImpl implements IStorage {
 
-public class LocalStorageImpl  implements IStorage {
-
-    private static File GAME_DATA = new File(System.getProperty("user.home"), "gamedata.txt");
+    private static File GAME_DATA = new File(
+            System.getProperty("user.home"),
+            "gamedata.txt"
+    );
 
     @Override
     public void updateGameData(SudokuGame game) throws IOException {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(GAME_DATA);
+
+
+            FileOutputStream fileOutputStream =
+                    new FileOutputStream(GAME_DATA);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(game);
             objectOutputStream.close();
@@ -30,7 +40,9 @@ public class LocalStorageImpl  implements IStorage {
 
     @Override
     public SudokuGame getGameData() throws IOException {
-        FileInputStream fileInputStream = new FileInputStream(GAME_DATA);
+
+        FileInputStream fileInputStream =
+                new FileInputStream(GAME_DATA);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         try {
             SudokuGame gameState = (SudokuGame) objectInputStream.readObject();

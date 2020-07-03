@@ -1,7 +1,7 @@
 package it.vscalcione.sudoku.problemdomain;
 
+import it.vscalcione.sudoku.computationlogic.SudokuUtilities;
 import it.vscalcione.sudoku.constants.GameState;
-import it.vscalcione.sudoku.logic.computation.SudokuUtilities;
 
 import java.io.Serializable;
 
@@ -9,9 +9,10 @@ import java.io.Serializable;
  * Remember, a program contains representations of real world objects (i.e. Money, User, Game). These things
  * contain real world information (although they may also contain useless/stub/test information), and are necessary
  * for a program which does anything practical.
+ *
  * A game of sudoku is a board, which contain 81 squares.
+ *
  */
-
 public class SudokuGame implements Serializable {
     private final GameState gameState;
     private final int[][] gridState;

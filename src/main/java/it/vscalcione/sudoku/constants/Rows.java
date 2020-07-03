@@ -9,7 +9,6 @@ package it.vscalcione.sudoku.constants;
  *
  * The values represent the Y coordinates of each tile.
  */
-
 public enum Rows {
     TOP,
     MIDDLE,

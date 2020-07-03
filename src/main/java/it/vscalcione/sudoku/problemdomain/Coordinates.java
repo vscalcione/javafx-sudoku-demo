@@ -5,9 +5,7 @@ import java.util.Objects;
 /**
  * Convenience class for storing the location of a given tile in the Sudoku puzzle in a Hashmap.
  */
-
 public class Coordinates {
-
     private final int x;
     private final int y;
 

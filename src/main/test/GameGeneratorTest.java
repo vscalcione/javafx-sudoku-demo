@@ -1,32 +1,43 @@
-import it.vscalcione.sudoku.logic.computation.GameLogic;
-import org.junit.Test;
+import it.vscalcione.sudoku.computationlogic.GameLogic;
+import it.vscalcione.sudoku.problemdomain.SudokuGame;
+import org.junit.jupiter.api.Test;
 
 public class GameGeneratorTest {
 
+    /**
+     * Generate a new puzzle based on the appropriate rules, with 30 numbers initially completed.
+     */
     @Test
-    public void onGenerateNewPuzzle(){
+    public void onGenerateNewPuzzle() {
         int[][] newPuzzle = GameLogic.getNewGame().getCopyOfGridState();
+
         int numberOfFilledSquares = 0;
 
-        // Trasverse array
-        for(int i = 0; i < 9; i++){
-            for(int y = 0; y < 9; y++){
-                if(newPuzzle[i][y] != 0){
-                    numberOfFilledSquares++;
-                }
+        //Traverse array
+        for (int xIndex = 0; xIndex < 9; xIndex++){
+            for (int yIndex = 0; yIndex < 9; yIndex++ ){
+                if (newPuzzle[xIndex][yIndex] != 0) numberOfFilledSquares++;
             }
         }
 
-        // Check of invalid set up
-        assert(!GameLogic.rowsAreInvalid(newPuzzle));
-        assert(!GameLogic.columnsAreInvalid(newPuzzle));
-        assert(!GameLogic.squaresAreInvalid(newPuzzle));
-        assert(numberOfFilledSquares == 81);
+        //Check of invalid set up
+        assert (!GameLogic.rowsAreInvalid(newPuzzle));
+        assert (!GameLogic.columnsAreInvalid(newPuzzle));
+        assert (!GameLogic.squaresAreInvalid(newPuzzle));
+        assert (numberOfFilledSquares == 81);
+
     }
 
+    /**
+     * After spending several days sorting out how to generate a new valid sudoku puzzle, this test
+     * will confirm if my algorithm works.
+     */
+    @Test
     public void test100NewPuzzles(){
-        for (int i = 0; i < 100; i++){
-            int [][] newPuzzle = GameLogic.getNewGame().getCopyOfGridState();
+        for (int testIndex = 0; testIndex < 100; testIndex++){
+
+            int[][] newPuzzle = GameLogic.getNewGame().getCopyOfGridState();
+
             assert (!GameLogic.rowsAreInvalid(newPuzzle));
             assert (!GameLogic.columnsAreInvalid(newPuzzle));
             assert (!GameLogic.squaresAreInvalid(newPuzzle));
