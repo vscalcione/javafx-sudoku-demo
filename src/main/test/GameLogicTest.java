@@ -1,4 +1,4 @@
-import it.vscalcione.sudoku.computationlogic.GameLogic;
+import it.vscalcione.sudoku.logic.computation.GameLogic;
 import it.vscalcione.sudoku.constants.GameState;
 import org.junit.jupiter.api.Test;
 

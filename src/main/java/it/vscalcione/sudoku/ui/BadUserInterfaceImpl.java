@@ -1,10 +1,8 @@
-package it.vscalcione.sudoku.userinterface;
+package it.vscalcione.sudoku.ui;
 
 import it.vscalcione.sudoku.constants.GameState;
 import it.vscalcione.sudoku.problemdomain.Coordinates;
 import it.vscalcione.sudoku.problemdomain.SudokuGame;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -23,18 +21,12 @@ import javafx.stage.Stage;
 
 import java.util.HashMap;
 
-/**
- * Manages the window, and displays a pop up notification when the user completes the puzzle.
- */
-public class BadUserInterfaceImpl implements IUserInterfaceContract.View,
-        EventHandler<KeyEvent> {
+public class BadUserInterfaceImpl implements IUserInterfaceContract.View, EventHandler<KeyEvent> {
+
     private final Stage stage;
     private final Group root;
-
     private HashMap<Coordinates, SudokuTextField> textFieldCoordinates;
-
     private IUserInterfaceContract.EventListener listener;
-
 
     public BadUserInterfaceImpl(Stage stage) {
         this.stage = stage;
@@ -62,14 +54,12 @@ public class BadUserInterfaceImpl implements IUserInterfaceContract.View,
 
         final int xOrigin = 50;
         final int yOrigin = 50;
-        //how much to move the x or y value after each loop
         final int xAndYDelta = 64;
 
         for (int xIndex = 0; xIndex < 9; xIndex++) {
             for (int yIndex = 0; yIndex < 9; yIndex++) {
                 int x = xOrigin + xIndex * xAndYDelta;
                 int y = yOrigin + yIndex * xAndYDelta;
-                //draw it
                 SudokuTextField stf = new SudokuTextField(xIndex, yIndex);
                 Font numberFont = new Font(32);
                 stf.setFont(numberFont);
@@ -89,59 +79,43 @@ public class BadUserInterfaceImpl implements IUserInterfaceContract.View,
         int index = 0;
         while (index < 8) {
             Rectangle vl = new Rectangle();
-
             vl.setX(xAndY + 64 * index);
             vl.setY(50);
             vl.setHeight(576);
-            if (index == 2 || index == 5) {
+            if (index == 2 || index == 5)
                 vl.setWidth(3);
-            } else {
+            else
                 vl.setWidth(2);
-            }
             vl.setFill(Color.BLACK);
 
             Rectangle hl = new Rectangle();
             hl.setY(xAndY + 64 * index);
             hl.setX(50);
             hl.setWidth(576);
-            if (index == 2 || index == 5) {
+            if (index == 2 || index == 5)
                 hl.setHeight(3);
-            } else {
+            else
                 hl.setHeight(2);
-            }
+
             hl.setFill(Color.BLACK);
 
-            root.getChildren().addAll(
-                    vl,
-                    hl
-            );
-
+            root.getChildren().addAll(vl, hl);
             index++;
         }
-
         stage.show();
-
     }
-
 
     @Override
     public void setListener(IUserInterfaceContract.EventListener listener) {
         this.listener = listener;
     }
 
-    /**
-     * Each time the user makes an input (which can be 0 to delete a number), we update the user
-     * interface appropriately.
-     */
     @Override
     public void updateSquare(int x, int y, int input) {
         SudokuTextField tile = textFieldCoordinates.get(new Coordinates(x, y));
-        String value = Integer.toString(
-                input
-        );
-
-        if (value.equals("0")) value = "";
-
+        String value = Integer.toString(input);
+        if (value.equals("0"))
+            value = "";
         tile.textProperty().setValue(value);
     }
 
@@ -150,18 +124,9 @@ public class BadUserInterfaceImpl implements IUserInterfaceContract.View,
         for (int xIndex = 0; xIndex < 9; xIndex++) {
             for (int yIndex = 0; yIndex < 9; yIndex++) {
                 TextField tile = textFieldCoordinates.get(new Coordinates(xIndex, yIndex));
-
-                String value = Integer.toString(
-                        game.getCopyOfGridState()[xIndex][yIndex]
-                );
-
+                String value = Integer.toString(game.getCopyOfGridState()[xIndex][yIndex]);
                 if (value.equals("0")) value = "";
-                tile.setText(
-                        value
-                );
-
-                //If a given tile has a non-zero value and the state of the game is GameState.NEW, then mark
-                //the tile as read only. Otherwise, ensure that it is NOT read only.
+                tile.setText(value);
                 if (game.getGameState() == GameState.NEW){
                     if (value.equals("")) {
                         tile.setStyle("-fx-opacity: 1;");
@@ -179,8 +144,8 @@ public class BadUserInterfaceImpl implements IUserInterfaceContract.View,
     public void showDialog(String message) {
         Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.OK);
         dialog.showAndWait();
-
-        if (dialog.getResult() == ButtonType.OK) listener.onDialogClick();
+        if (dialog.getResult() == ButtonType.OK)
+            listener.onDialogClick();
     }
 
     @Override
@@ -192,17 +157,18 @@ public class BadUserInterfaceImpl implements IUserInterfaceContract.View,
 
     @Override
     public void handle(KeyEvent event) {
+        String currentEvent = event.getText();
         if (event.getEventType() == KeyEvent.KEY_PRESSED) {
-            if (event.getText().equals("0")
-                    || event.getText().equals("1")
-                    || event.getText().equals("2")
-                    || event.getText().equals("3")
-                    || event.getText().equals("4")
-                    || event.getText().equals("5")
-                    || event.getText().equals("6")
-                    || event.getText().equals("7")
-                    || event.getText().equals("8")
-                    || event.getText().equals("9")
+            if (currentEvent.equals("0")
+                    || currentEvent.equals("1")
+                    || currentEvent.equals("2")
+                    || currentEvent.equals("3")
+                    || currentEvent.equals("4")
+                    || currentEvent.equals("5")
+                    || currentEvent.equals("6")
+                    || currentEvent.equals("7")
+                    || currentEvent.equals("8")
+                    || currentEvent.equals("9")
             ) {
                 int value = Integer.parseInt(event.getText());
                 listener.onSudokuInput(
@@ -220,7 +186,6 @@ public class BadUserInterfaceImpl implements IUserInterfaceContract.View,
                 ((TextField)event.getSource()).setText("");
             }
         }
-
         event.consume();
     }
 }

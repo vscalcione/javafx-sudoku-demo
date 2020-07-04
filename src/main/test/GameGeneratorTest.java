@@ -1,5 +1,4 @@
-import it.vscalcione.sudoku.computationlogic.GameLogic;
-import it.vscalcione.sudoku.problemdomain.SudokuGame;
+import it.vscalcione.sudoku.logic.computation.GameLogic;
 import org.junit.jupiter.api.Test;
 
 public class GameGeneratorTest {

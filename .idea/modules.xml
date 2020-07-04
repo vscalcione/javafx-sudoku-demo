@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JavaDesktopSudokuDemo.iml" filepath="$PROJECT_DIR$/JavaDesktopSudokuDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javafxSudokuDemo.iml" filepath="$PROJECT_DIR$/javafxSudokuDemo.iml" />
     </modules>
   </component>
 </project>
