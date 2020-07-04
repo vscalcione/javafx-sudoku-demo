@@ -2,27 +2,18 @@ import it.vscalcione.sudoku.constants.GameState;
 import it.vscalcione.sudoku.problemdomain.SudokuGame;
 
 class TestData {
-    //No access modifier means Package-Private access, i.e. only tests within src/test/java
-    /**
-     * Note: Arrays which do not use an initializer have all elements assigned to 0 by default.
-     * This is convenient, as 0 represents an empty square in the sudoku puzzle.
-     * generate a valid new puzzle with 30 solved squares
-     * @return
-     */
-    static SudokuGame getValidStart(){
+
+    public static SudokuGame getValidStart(){
         int[][] validStart = new int[9][9];
 
-        //first row
         validStart[0][0] = 6;
         validStart[4][0] = 4;
         validStart[7][0] = 1;
 
-        //...
         validStart[0][1] = 9;
         validStart[2][1] = 3;
         validStart[7][1] = 2;
 
-        //...
         validStart[1][2] = 5;
         validStart[5][2] = 7;
 
@@ -58,10 +49,9 @@ class TestData {
         return validStartGame;
     }
 
-    static SudokuGame getSolved(){
+    public static SudokuGame getSolved(){
         int[][] solved = new int[9][9];
 
-        //first group of 9
         solved[0][0] = 6;
         solved[1][0] = 8;
         solved[2][0] = 7;
@@ -72,8 +62,6 @@ class TestData {
         solved[1][2] = 5;
         solved[2][2] = 4;
 
-
-        //...
         solved[3][0] = 3;
         solved[4][0] = 4;
         solved[5][0] = 2;
@@ -84,8 +72,6 @@ class TestData {
         solved[4][2] = 9;
         solved[5][2] = 7;
 
-
-        //...
         solved[6][0] = 9;
         solved[7][0] = 1;
         solved[8][0] = 5;
@@ -157,14 +143,12 @@ class TestData {
         solved[8][8] = 6;
 
         SudokuGame solvedGame = new SudokuGame(GameState.COMPLETE, solved);
-
         return solvedGame;
     }
 
-    static SudokuGame getInvalid(){
+    public static SudokuGame getInvalid(){
         int[][] invalid = new int[9][9];
 
-        //first group of 9
         invalid[0][0] = 2;
         invalid[1][0] = 2;
         invalid[2][0] = 2;
@@ -176,7 +160,6 @@ class TestData {
         invalid[2][2] = 2;
 
         SudokuGame invalidGame = new SudokuGame(GameState.ACTIVE, invalid);
-
         return invalidGame;
     }
 }
